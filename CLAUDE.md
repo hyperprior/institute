@@ -174,6 +174,9 @@ The site is the Pages project `hyperprior-institute`, deployed by CI on push to
   `hyperprior-institute.pages.dev`. Only the dashboard creates it automatically.
 - After DNS changes, the local resolver may cache the old miss. Verify with
   `dig @1.1.1.1` and `curl --resolve` before concluding something is broken.
+  Right after a deploy, retry for about 30 seconds before calling a page stale.
+- `cf` writes a `.cloudflare/` cache (it includes account details) into whatever
+  directory it runs in. It's gitignored here. Don't run `cf` from another repo.
 
 ## Git
 
@@ -181,3 +184,7 @@ The site is the Pages project `hyperprior-institute`, deployed by CI on push to
   trailers, "Generated with" lines, or any AI attribution to commits, PRs, branches
   or tags.
 - Ask before pushing, changing repo visibility, or touching Cloudflare.
+- Stage files by name and read `git status` before every commit. Never commit
+  blind with `git add -A`, because tools drop files into the repo (see `.cloudflare/`).
+- A multi-step shell batch that ends in a commit or push must stop on the first
+  failure (`set -e` or `&&`). Never chain it with `;`.
