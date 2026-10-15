@@ -23,7 +23,25 @@ Scan the conversation for:
   command could do.
 - **Gaps.** A question you had to ask that this repo should have answered.
 
-## 2. Route each finding
+## 2. Hunt context killers
+
+Every retro, not just when asked. Context is a cost, like wall-clock and memory.
+Look at what this session actually loaded and spent:
+- **Always-on load.** Hook output (SessionStart, UserPromptSubmit), the skill
+  listing, MCP tools loaded in full rather than deferred, the agent list, and the
+  size of CLAUDE.md and the memory index. Anything not used here is a suspect.
+- **In-session waste.** Big tool outputs that got read but not used, whole files
+  read where a range would do, and repeated reads of the same thing.
+- **Numbers.** Ask hyperprior for a fresh `/context` (you can't run it) and
+  compare it with the last retro's numbers in the `context-trim` memory.
+
+Present a short plan: each killer, its rough size, the cut, and its scope
+(repo, project-local `settings.local.json`, or global). Project-local and repo
+cuts follow the rules in step 4. Global cuts always wait for a yes, because
+`~/.claude` is shared with work. After a cut lands, record the new numbers in the
+memory.
+
+## 3. Route each finding
 
 | Finding | Goes to |
 |---|---|
@@ -37,7 +55,7 @@ Scan the conversation for:
 Check before writing. Update what's already there rather than adding a duplicate,
 and delete rules that turned out wrong.
 
-## 3. Apply or propose
+## 4. Apply or propose
 
 - **Small and clear** (a wording fix, a missing step, a corrected command, a new
   memory): apply it and commit with a `retro:` prefix in the message.
@@ -45,8 +63,8 @@ and delete rules that turned out wrong.
   propose it. Use a lavish plan if it needs a picture, otherwise one short list.
   Wait for a yes.
 
-## 4. Report
+## 5. Report
 
-End with a few lines: what was learned, what changed, what's proposed. If the
+End with a few lines: what was learned, what changed, what's proposed, and the context plan. If the
 change is notable machinery news, offer a `labs/machinery/log/` entry. If nothing
 was worth keeping, say so. An empty retro is fine.

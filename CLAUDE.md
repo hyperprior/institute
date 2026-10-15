@@ -157,7 +157,8 @@ ask for any of this.
   context (accounts, personal preferences) belongs in memory and never in this repo.
 - **Improve.** At natural stopping points after substantial work, run the `retro`
   skill. It turns corrections, friction and steps repeated by hand into better
-  rules, skills or `hp` commands. Small, clear fixes get applied and committed.
+  rules, skills or `hp` commands. Every retro also hunts context killers and
+  proposes cuts, because context is a cost too. Small, clear fixes get applied and committed.
   Anything bigger (a new skill, a new command, a changed rule) gets proposed first.
 - **Heal.** When a documented step fails, fix whatever was wrong at its source
   (this file, a skill, or `hp`) in the same session. A workaround alone isn't a fix.
