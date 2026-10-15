@@ -48,8 +48,14 @@ Look at what this session actually loaded and spent:
   raw control characters that break a naive JSON parse. That has no categories,
   so ask hyperprior for `/context` if you need them.
 
-Present a short plan: each killer, its rough size, the cut, and its scope
-(repo, project-local `settings.local.json`, or global). Project-local and repo
+Present the plan as a table: each killer, its size in tokens, its share of the
+session's total context as a percentage, the cut, and its scope (repo,
+project-local `settings.local.json`, or global). State the total first, and end
+with a row summing the proposed cuts (tokens and %). Without `/context` numbers,
+estimate a tool's size as the characters of its description plus schema divided
+by 4, and mark it "est.". To remove a tool from this repo's context, add a
+whole-tool deny rule (`Artifact`, `mcp__<server>`) to `settings.local.json`; for
+skills, also set `skillOverrides`. Project-local and repo
 cuts follow the rules in step 4. Global cuts always wait for a yes, because
 `~/.claude` is shared with work. After a cut lands, record the new numbers in the
 memory.
