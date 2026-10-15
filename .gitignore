@@ -4,3 +4,5 @@ labs/*/data/
 .DS_Store
 .lavish/
 .cloudflare/
+
+.claude/settings.local.json
