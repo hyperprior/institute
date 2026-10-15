@@ -111,7 +111,8 @@ about.md           the home page intro
 labs/machinery/    lab #0: the hp CLI + custom static site generator (no framework, zero JS)
 labs/<name>/       lab.toml, log/, figures/, data/ (ignored), src/
 .claude/skills/    lab-tech skills: new-sketch, write-up, promote, bury, propose-extraction,
-                   plus lavish (visual plan review)
+                   retro (self-learning), lavish (visual plan review)
+.claude/hooks/     retro-nudge: reminds you to run the retro after substantial sessions
 .github/workflows/ deploy to Cloudflare Pages on push to main
 ```
 
@@ -119,9 +120,27 @@ labs/<name>/       lab.toml, log/, figures/, data/ (ignored), src/
 
 Plan visually. Whenever you lay out a plan, compare approaches, or propose a design,
 use the `lavish` skill to turn it into an HTML artifact that hyperprior can annotate
-and send back. Iterate on the feedback before you build anything. Put plan
-artifacts in `.plans/` (gitignored). A plan that turns out to matter becomes a
-log entry.
+and send back. Iterate on the feedback before you build anything. Plan artifacts
+live in `.lavish/` (gitignored, the lavish default). A plan that turns out to matter
+becomes a log entry.
+
+## Self-learning
+
+The institute improves its own workflow as it goes. hyperprior shouldn't have to
+ask for any of this.
+
+- **Remember.** When hyperprior corrects you, states a preference, or confirms an
+  approach that wasn't obvious, save it to your auto-memory right away. Private
+  context (accounts, personal preferences) belongs in memory and never in this repo.
+- **Improve.** At natural stopping points after substantial work, run the `retro`
+  skill. It turns corrections, friction and steps repeated by hand into better
+  rules, skills or `hp` commands. Small, clear fixes get applied and committed.
+  Anything bigger (a new skill, a new command, a changed rule) gets proposed first.
+- **Heal.** When a documented step fails, fix whatever was wrong at its source
+  (this file, a skill, or `hp`) in the same session. A workaround alone isn't a fix.
+  A fix to `hp` gets a regression test.
+- **Show it.** Notable machinery changes get an entry in `labs/machinery/log/`,
+  because the lab learning is part of the story.
 
 ## Git
 
