@@ -36,6 +36,10 @@ Look at what this session actually loaded and spent:
   returns tokens per category (MCP tools, system tools, skills, memory, agents).
   Compare them with the last retro's numbers in the `context-trim` memory. It
   merges loaded and deferred tools, so use it for trends, not to match `/context`.
+  It only exists in the desktop app. In the CLI or a cloud session, get the
+  total from the newest transcript: the last assistant `usage` in
+  `~/.claude/projects/<repo-slug>/*.jsonl` (input + cache read + cache creation).
+  That has no categories, so ask hyperprior for `/context` if you need them.
 
 Present a short plan: each killer, its rough size, the cut, and its scope
 (repo, project-local `settings.local.json`, or global). Project-local and repo
