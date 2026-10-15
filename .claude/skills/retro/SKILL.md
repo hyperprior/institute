@@ -37,9 +37,16 @@ Look at what this session actually loaded and spent:
   Compare them with the last retro's numbers in the `context-trim` memory. It
   merges loaded and deferred tools, so use it for trends, not to match `/context`.
   It only exists in the desktop app. In the CLI or a cloud session, get the
-  total from the newest transcript: the last assistant `usage` in
-  `~/.claude/projects/<repo-slug>/*.jsonl` (input + cache read + cache creation).
-  That has no categories, so ask hyperprior for `/context` if you need them.
+  total from the newest transcript (input + cache read + cache creation of the
+  last assistant turn):
+  ```sh
+  f=$(ls -t ~/.claude/projects/$(pwd | tr / -)/*.jsonl | head -1)
+  jq -r 'select(.type=="assistant" and .message.usage) | .message.usage
+    | .input_tokens + .cache_read_input_tokens + .cache_creation_input_tokens' "$f" 2>/dev/null | tail -1
+  ```
+  Use jq, not grep: tool output lines mention "usage" too, and some lines have
+  raw control characters that break a naive JSON parse. That has no categories,
+  so ask hyperprior for `/context` if you need them.
 
 Present a short plan: each killer, its rough size, the cut, and its scope
 (repo, project-local `settings.local.json`, or global). Project-local and repo
