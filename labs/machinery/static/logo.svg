@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <style>
+    .s { fill: none; stroke: #1d1c1a; stroke-width: 1.8; }
+    .f { fill: #1d1c1a; }
+    @media (prefers-color-scheme: dark) { .s { stroke: #ebe7df; } .f { fill: #ebe7df; } }
+  </style>
+  <!-- A plate diagram: a hyperparameter feeding a plate of priors feeding a plate of data. -->
+  <circle class="f" cx="16" cy="3.6" r="2.4"/>
+  <line class="s" x1="16" y1="6" x2="16" y2="10"/>
+  <rect class="s" x="2.5" y="8.5" width="27" height="21.5" rx="2"/>
+  <circle class="s" cx="16" cy="13.6" r="3"/>
+  <line class="s" x1="16" y1="16.6" x2="16" y2="19.5"/>
+  <rect class="s" x="8" y="19.5" width="16" height="7.5" rx="1.5"/>
+  <circle class="f" cx="16" cy="23.25" r="2"/>
+</svg>

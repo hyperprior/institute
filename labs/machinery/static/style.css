@@ -1,0 +1,132 @@
+/* Hyperprior Institute. Hand-written, no framework. */
+
+:root {
+  --bg: #fbfaf7;
+  --fg: #1d1c1a;
+  --muted: #6b675f;
+  --rule: #e2ded5;
+  --accent: #2f4fbf;
+  --code-bg: #f1eee8;
+  --sketch: #a8660f;
+  --lab: #2b7a4b;
+  --library: #2f4fbf;
+  --buried: #8a857d;
+  --serif: "Iowan Old Style", "Charter", "Palatino Linotype", Georgia, serif;
+  --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #141413;
+    --fg: #ebe7df;
+    --muted: #9b968c;
+    --rule: #2d2b28;
+    --accent: #93a8ff;
+    --code-bg: #1f1e1c;
+    --sketch: #e2a64e;
+    --lab: #69c793;
+    --library: #93a8ff;
+    --buried: #8a857d;
+  }
+}
+
+* { box-sizing: border-box; }
+
+html { background: var(--bg); }
+
+body {
+  margin: 0 auto;
+  max-width: 44rem;
+  padding: 0 16px 4rem;
+  background: var(--bg);
+  color: var(--fg);
+  font: 18px/1.65 var(--serif);
+  overflow-wrap: break-word;
+}
+
+a { color: var(--accent); text-underline-offset: 0.15em; }
+a:hover { text-decoration-thickness: 2px; }
+
+header.site {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem 1.5rem;
+  padding: 1.5rem 0;
+  border-bottom: 1px solid var(--rule);
+  margin-bottom: 2rem;
+}
+.brand { display: flex; align-items: center; gap: 0.6rem; color: var(--fg); text-decoration: none; font-weight: 600; }
+header.site nav { display: flex; flex-wrap: wrap; gap: 1rem; font: 0.85rem var(--mono); }
+header.site nav a { color: var(--muted); text-decoration: none; }
+header.site nav a:hover { color: var(--fg); }
+
+footer.site { margin-top: 4rem; padding-top: 1rem; border-top: 1px solid var(--rule); color: var(--muted); font: 0.8rem var(--mono); }
+footer.site a { color: var(--muted); }
+
+h1, h2, h3 { line-height: 1.25; font-weight: 600; }
+h1 { font-size: 2rem; margin: 0 0 0.75rem; }
+h2 { font-size: 1.25rem; margin: 2.5rem 0 0.75rem; }
+.lede { color: var(--muted); margin-top: 0; }
+
+time, .meta, .lab-tag, .draft, .stage { font-family: var(--mono); }
+
+ol.entries { list-style: none; padding: 0; margin: 0; }
+ol.entries li { display: grid; grid-template-columns: 7.5rem 1fr; gap: 1rem; padding: 0.35rem 0; border-bottom: 1px solid var(--rule); }
+ol.entries time { color: var(--muted); font-size: 0.85rem; padding-top: 0.2rem; }
+@media (max-width: 30rem) {
+  ol.entries li { grid-template-columns: 1fr; gap: 0; }
+}
+.lab-tag { font-size: 0.75rem; color: var(--muted); }
+.draft { font-size: 0.7rem; color: var(--sketch); text-transform: uppercase; }
+
+ul.labs { list-style: none; padding: 0; margin: 0; }
+ul.labs li { padding: 0.6rem 0; border-bottom: 1px solid var(--rule); }
+ul.labs p { margin: 0.2rem 0 0; color: var(--muted); font-size: 0.95rem; }
+
+.stage {
+  display: inline-block;
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  vertical-align: middle;
+  padding: 0.05rem 0.4rem;
+  border: 1px solid currentColor;
+  border-radius: 3px;
+}
+.stage-sketch { color: var(--sketch); }
+.stage-lab { color: var(--lab); }
+.stage-library { color: var(--library); }
+.stage-buried { color: var(--buried); }
+
+dl.meta { display: grid; grid-template-columns: max-content 1fr; gap: 0.2rem 1rem; font-size: 0.85rem; }
+dl.meta dt { color: var(--muted); }
+dl.meta dd { margin: 0; }
+
+article header { margin-bottom: 2rem; }
+article .meta { color: var(--muted); font-size: 0.85rem; }
+
+code, pre { font-family: var(--mono); font-size: 0.85em; }
+code { background: var(--code-bg); padding: 0.1em 0.3em; border-radius: 3px; }
+pre { background: var(--code-bg); padding: 1rem; overflow-x: auto; border-radius: 4px; line-height: 1.45; }
+pre code { background: none; padding: 0; }
+
+blockquote { margin: 1.5rem 0; padding-left: 1rem; border-left: 3px solid var(--rule); color: var(--muted); }
+img, svg, video { max-width: 100%; height: auto; }
+table { border-collapse: collapse; display: block; overflow-x: auto; font-size: 0.9rem; }
+th, td { border-bottom: 1px solid var(--rule); padding: 0.3rem 0.8rem 0.3rem 0; text-align: left; }
+hr { border: none; border-top: 1px solid var(--rule); margin: 2rem 0; }
+
+math { font-size: 1.05em; }
+math[display="block"] { display: block math; overflow-x: auto; margin: 1.25rem 0; }
+.math-error { color: var(--sketch); }
+
+figure.lineage { margin: 1.5rem 0; overflow-x: auto; }
+figure.lineage .edge { fill: none; stroke: var(--rule); stroke-width: 1.5; }
+figure.lineage .node rect { fill: var(--bg); stroke: currentColor; stroke-width: 1.2; }
+figure.lineage .node text { fill: var(--fg); font: 13px var(--mono); }
+figure.lineage .node .node-stage { fill: currentColor; font-size: 10px; text-transform: uppercase; letter-spacing: 0.06em; }
+figure.lineage a:hover rect { stroke-width: 2.4; }
