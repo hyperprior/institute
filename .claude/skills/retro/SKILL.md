@@ -32,6 +32,21 @@ Look at what this session actually loaded and spent:
   size of CLAUDE.md and the memory index. Anything not used here is a suspect.
 - **In-session waste.** Big tool outputs that got read but not used, whole files
   read where a range would do, and repeated reads of the same thing.
+- **Verbose I/O.** What the session wrote and read, not only what it loaded.
+  Replies: preamble, restating the ask, prose that retells a table, hedges,
+  closing summaries nobody needed. Tool calls: output that a filter, `-q` or
+  `| tail` would have cut. Instructions: skills and CLAUDE.md that are wordy
+  themselves or ask for wordy output (long report templates, mandatory
+  sections). The fix is the institute's own caveman, built by hand: a terse
+  house-style rule in CLAUDE.md, a tighter template in a skill, a quieter
+  `hp` flag. Each proposal names the pattern, shows a before → after from this
+  session, and estimates the saving. Measure with:
+  ```sh
+  jq -s '[.[] | .message.usage.output_tokens? // empty] | add' "$f"   # tokens written
+  jq -r 'select(.type=="user") | .message.content | arrays | .[]
+    | select(.type=="tool_result") | (.content | tostring | length / 4 | floor)' "$f" \
+    | sort -rn | head -5                                               # biggest tool results, est.
+  ```
 - **Numbers.** Call `mcp__ccd_session_mgmt__get_usage` (session `self`). It
   returns tokens per category (MCP tools, system tools, skills, memory, agents).
   Compare them with the last retro's numbers in the `context-trim` memory. It
