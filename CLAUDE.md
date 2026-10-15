@@ -110,9 +110,18 @@ sparks.toml        the idea list
 about.md           the home page intro
 labs/machinery/    lab #0: the hp CLI + custom static site generator (no framework, zero JS)
 labs/<name>/       lab.toml, log/, figures/, data/ (ignored), src/
-.claude/skills/    lab-tech skills: new-sketch, write-up, promote, bury, propose-extraction
+.claude/skills/    lab-tech skills: new-sketch, write-up, promote, bury, propose-extraction,
+                   plus lavish (visual plan review)
 .github/workflows/ deploy to Cloudflare Pages on push to main
 ```
+
+## Planning
+
+Plan visually. Whenever you lay out a plan, compare approaches, or propose a design,
+use the `lavish` skill to turn it into an HTML artifact that hyperprior can annotate
+and send back. Iterate on the feedback before you build anything. Put plan
+artifacts in `.plans/` (gitignored). A plan that turns out to matter becomes a
+log entry.
 
 ## Git
 

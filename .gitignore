@@ -2,3 +2,4 @@
 /dist
 labs/*/data/
 .DS_Store
+.plans/
