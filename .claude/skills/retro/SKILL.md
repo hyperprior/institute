@@ -32,8 +32,10 @@ Look at what this session actually loaded and spent:
   size of CLAUDE.md and the memory index. Anything not used here is a suspect.
 - **In-session waste.** Big tool outputs that got read but not used, whole files
   read where a range would do, and repeated reads of the same thing.
-- **Numbers.** Ask hyperprior for a fresh `/context` (you can't run it) and
-  compare it with the last retro's numbers in the `context-trim` memory.
+- **Numbers.** Call `mcp__ccd_session_mgmt__get_usage` (session `self`). It
+  returns tokens per category (MCP tools, system tools, skills, memory, agents).
+  Compare them with the last retro's numbers in the `context-trim` memory. It
+  merges loaded and deferred tools, so use it for trends, not to match `/context`.
 
 Present a short plan: each killer, its rough size, the cut, and its scope
 (repo, project-local `settings.local.json`, or global). Project-local and repo
