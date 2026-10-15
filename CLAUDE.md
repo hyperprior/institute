@@ -142,6 +142,17 @@ ask for any of this.
 - **Show it.** Notable machinery changes get an entry in `labs/machinery/log/`,
   because the lab learning is part of the story.
 
+## Cloudflare
+
+The site is the Pages project `hyperprior-institute`, deployed by CI on push to
+`main`. Use the `cf` CLI for everything else. Start with
+`cf cli search "<task>"` and keep those queries anonymous (no domains, IDs or names).
+
+- A Pages custom domain attached through the API also needs a proxied CNAME to
+  `hyperprior-institute.pages.dev`. Only the dashboard creates it automatically.
+- After DNS changes, the local resolver may cache the old miss. Verify with
+  `dig @1.1.1.1` and `curl --resolve` before concluding something is broken.
+
 ## Git
 
 - Commits go out under hyperprior's own git identity. **Never** add `Co-Authored-By`

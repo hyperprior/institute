@@ -23,3 +23,7 @@ text = "Probabilistic record linkage across parish and civil records"
 [[spark]]
 date = "2026-10-14"
 text = "Stylometry and embedding search across Chrysostom's homilies and other Fathers"
+
+[[spark]]
+date = "2026-10-14"
+text = "hp shot: screenshot pages at phone/desktop widths in light and dark for visual checks"

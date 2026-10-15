@@ -5,6 +5,9 @@ description: The institute's self-learning loop. Review the session for correcti
 
 # Retro
 
+(If the Skill tool doesn't know `retro` yet, because skills added mid-session load
+on the next session, read this file and follow it directly.)
+
 Look back over the session and make the institute a little better at being a lab.
 This is about the *workflow*, not the science. Science goes in log entries
 (`write-up`).
