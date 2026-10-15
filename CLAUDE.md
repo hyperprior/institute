@@ -27,6 +27,28 @@ any other.
 The institute exists for fun. Nothing has a deadline. A guilt-free burial is a
 success, not a failure.
 
+## Mission: ML you can build at home
+
+hyperprior's conviction: machine learning should be something people build
+locally, in Rust, and it should not cost a million dollars. The institute pushes
+the envelope on simplicity and local running. It may reach for frontier-level work
+someday, and it will get there by making things smaller and simpler.
+
+- **Local first.** Everything must run on the reference machine: an Apple M4 laptop
+  with 24 GB of unified memory and a 10-core GPU. If it doesn't fit, shrink the idea
+  (smaller model, smarter data, quantize, stream) rather than renting a cluster.
+- **Rust end to end.** Training, inference, data and tooling are Rust. Reach for
+  Metal or wgpu for the GPU. If a Python reference implementation helps you
+  understand something, port what you learned. Don't ship the Python.
+- **Simplicity is the research.** Fewer dependencies, fewer moving parts, code you
+  can read in one sitting. A result that needs less hardware is a better result.
+- **Cost is a metric.** Report wall-clock time, peak memory and energy or dollars
+  alongside accuracy. "Trained in 40 minutes on a laptop" is a headline.
+- **Cloud is a small, optional appendage.** Blob storage (Cloudflare R2) for
+  datasets and checkpoints is fine when local disk isn't enough. Compute in the
+  cloud is the exception, needs a stated reason, and is never required to
+  reproduce a result.
+
 ## Lifecycle
 
 Sparks live in `sparks.toml`. Every project after that has a `stage` in its `lab.toml`:

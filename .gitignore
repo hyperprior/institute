@@ -3,3 +3,4 @@
 labs/*/data/
 .DS_Store
 .lavish/
+.cloudflare/

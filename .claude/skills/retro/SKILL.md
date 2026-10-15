@@ -32,7 +32,7 @@ Scan the conversation for:
 | A procedure | a skill in `.claude/skills/` |
 | Something mechanical or repeated | an `hp` command (with a test) |
 | A wrong doc or broken step | fix it at the source, now |
-| A bigger idea for the machinery | `hp spark "…"` |
+| A bigger idea for the machinery | mention it in the report; spark it only if hyperprior says so |
 
 Check before writing. Update what's already there rather than adding a duplicate,
 and delete rules that turned out wrong.

@@ -223,6 +223,7 @@ pub fn sparks(inst: &Institute) -> String {
         html! {
             h1 { "Sparks" }
             p.lede { "One-line ideas. Writing one down costs nothing and obliges nothing." }
+            @if inst.sparks.is_empty() { p { "None right now." } }
             ol.entries {
                 @for spark in &inst.sparks {
                     li { time datetime=(spark.date) { (spark.date) } span { (spark.text) } }
