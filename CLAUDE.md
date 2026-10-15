@@ -108,6 +108,7 @@ hp serve                                 # preview at http://localhost:8000 with
 ```
 
 Until `hp` is installed, run it as `cargo run -q -p hp -- <args>` (the `justfile` aliases this).
+`just ship` runs fmt, clippy and tests, pushes, waits for the deploy, and checks the live site.
 
 ## Code conventions
 
@@ -183,7 +184,10 @@ The site is the Pages project `hyperprior-institute`, deployed by CI on push to
 - Commits go out under hyperprior's own git identity. **Never** add `Co-Authored-By`
   trailers, "Generated with" lines, or any AI attribution to commits, PRs, branches
   or tags.
-- Ask before pushing, changing repo visibility, or touching Cloudflare.
+- Routine pushes to `main` are fine once checks pass. Ship with `just ship`, which
+  checks, pushes, waits for the deploy and confirms the live site. Ask first before
+  changing repo visibility, anything account-wide on Cloudflare, force-pushing,
+  rewriting pushed history, or anything else destructive.
 - Stage files by name and read `git status` before every commit. Never commit
   blind with `git add -A`, because tools drop files into the repo (see `.cloudflare/`).
 - A multi-step shell batch that ends in a commit or push must stop on the first
