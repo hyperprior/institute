@@ -64,3 +64,65 @@ result has to reproduce without an API key.
   scikit-learn (diabetes, breast cancer, wine), so they run offline. Examples use
   California housing, Adult income, Bike Sharing and German credit, each fetched once
   and cached, with its license recorded next to it.
+
+## Later: the code, and first light
+
+The rewrite is about 700 lines. `Hierophant.ask(question, row=...)` computes exact
+TreeSHAP for the row, rounds and sorts it, and sends it to the LLM with the question.
+The model has to reply in JSON: a list of sentences, each with one claim. Four kinds
+of claim for now:
+
+- **direction**: this row's value of a feature pushed the output up or down
+- **top**: a feature was the largest contributor
+- **rank**: one feature contributed more than another
+- **magnitude**: a feature contributed about $v$
+
+The verifier checks rank, top and magnitude against the SHAP values. It checks
+direction by intervention: swap the feature for typical values from the data and see
+which way the prediction moves,
+
+$$\Delta_j = f(x) - \frac{1}{|B|}\sum_{b \in B} f(x_{j \leftarrow b_j}).$$
+
+On the diabetes model this lands close to SHAP. For one patient, `bmi` has
+$\Delta = -20.3$ against a SHAP value of $-19.7$. Close, but not always the same,
+which comes up again below.
+
+The tests run offline. A `Replay` backend plays back recorded responses, so a run
+against a real model can be saved once and scored again for free whenever the
+verifier changes. That saved several re-runs today.
+
+**First light** used Qwen3-4B-Instruct, 4-bit, served locally with MLX on the M4.
+It's a 2.3 GB download, and the server sat around 1.5 GB resident. We asked "why did
+the model make this prediction for this row?" about 20 diabetes patients, 10
+breast-cancer cases and 10 California block groups.
+
+- **Every reply failed to parse.** The model sent a bare JSON list and skipped the
+  `{"sentences": [...]}` wrapper the prompt asked for. The parser takes either now.
+- **It wrote up to 13 sentences** when asked for "a few", several of them just
+  echoes of the evidence like `bmi = 23.0: down`. A hard cap ("at most 5 plain-English
+  sentences, don't list every feature") fixed it.
+- **The verifier was unfair.** For one patient, SHAP gives `s4` −5.8, but swapping
+  `s4` alone nudges the prediction up, because the model has interactions. The LLM
+  repeated the evidence correctly and got marked refuted. When SHAP and intervention
+  disagree, the verdict is now *inconclusive*.
+- **Most of the "hallucinations" were our fault.** 10 of the 14 refuted claims were
+  about the evidence line "(22 other features combined): +0.022". The model treated
+  it as a feature, even after the prompt told it not to, and the numbers it quoted
+  for that line were correct. Dropping the total from the evidence ("22 smaller
+  features not shown") made those failures go away.
+- **One claim verified while its sentence said something else.** The text described
+  the combined other features, but the attached claim compared `s5` with `s3`. The
+  verifier checks claims, not prose, so it passed. Catching this is the job of the
+  planned NLI checker.
+
+| run | sentences | verified | inconclusive | refuted | wall clock |
+|---|---|---|---|---|---|
+| prompt v1 | 185 | 162 (88%) | 9 | 14 | 236 s |
+| v2: no aggregate line | 178 | 168 (94%) | 7 | 3 | 243 s |
+
+A caution before reading much into 94%: so far, `ask` mostly measures whether a
+small model can *copy* correct numbers out of evidence it was handed, and it mostly
+can. The interesting questions come next. Is a generic "why?" even the right
+question? What about questions where the answer isn't sitting in the evidence (rank
+claims across rows, cohorts, "what would change this")? And how does the agent mode
+do when it has to go and fetch its own evidence?
