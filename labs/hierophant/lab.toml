@@ -1,0 +1,4 @@
+title = "Hierophant"
+stage = "sketch"
+started = "2026-10-16"
+summary = "Can an LLM explain an ML model in plain words and have every claim survive being checked against the model?"

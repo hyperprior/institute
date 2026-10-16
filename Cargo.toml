@@ -2,6 +2,8 @@
 # Every lab is a crate. The machinery (the `hp` CLI and site generator) is lab #0.
 # Shared crates get their own glob ("crates/*") on the first extraction.
 members = ["labs/*"]
+# Labs whose code lives in another language or repo keep only lab.toml and log/ here.
+exclude = ["labs/hierophant"]
 resolver = "3"
 
 [workspace.package]
