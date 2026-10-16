@@ -83,7 +83,10 @@ Rules:
 The repo is public by default and the site (hyperprior.institute) is a view of
 the repo. Anything committed to `labs/*/log/` is published.
 
-- **Log as you go.** A three-line entry is better than none. Entries are dated
+- **Log as you go, ship as you go.** While building, keep one running entry per lab
+  per day. Add findings, decisions and dead ends as they happen, and `just ship` at
+  milestones during the session. Don't save it all for the end. A three-line entry
+  is better than none. Entries are dated
   markdown files: `labs/<name>/log/YYYY-MM-DD-slug.md`. The first `# heading` is
   the title. No frontmatter. Prefix the filename with `_` to keep it a draft
   (shown by `hp serve`, not published).
