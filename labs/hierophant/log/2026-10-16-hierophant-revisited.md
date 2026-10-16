@@ -126,3 +126,7 @@ can. The interesting questions come next. Is a generic "why?" even the right
 question? What about questions where the answer isn't sitting in the evidence (rank
 claims across rows, cohorts, "what would change this")? And how does the agent mode
 do when it has to go and fetch its own evidence?
+
+The code is public now at
+[github.com/hyperprior/hierophant](https://github.com/hyperprior/hierophant). To
+replay first light there, run `uv run python examples/first_light.py`.
