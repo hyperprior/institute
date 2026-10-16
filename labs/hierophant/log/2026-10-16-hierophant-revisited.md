@@ -129,4 +129,6 @@ do when it has to go and fetch its own evidence?
 
 The code is public now at
 [github.com/hyperprior/hierophant](https://github.com/hyperprior/hierophant). To
-replay first light there, run `uv run python examples/first_light.py`.
+score first light again without a model, run
+`uv run python examples/first_light.py --replay`. The model's recorded replies are
+in `runs/`, and replaying them gives the same 94%.
