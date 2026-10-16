@@ -96,6 +96,8 @@ the repo. Anything committed to `labs/*/log/` is published.
 - Raw data goes in `labs/<name>/data/` (gitignored). Never commit data you don't
   have the right to publish, credentials, or anything private.
 - Write honestly: negative results, dead ends and "this didn't work" are content.
+  Measure every number before you publish it (line counts, timings, sizes). Don't
+  estimate from memory.
 
 ## Tools
 
@@ -123,8 +125,11 @@ Until `hp` is installed, run it as `cargo run -q -p hp -- <args>` (the `justfile
 - The machinery is lab #0: the `hp` crate lives in `labs/machinery`. Shared crates
   go in `crates/<name>` (add `"crates/*"` to the workspace members on the first
   one). A new shared crate needs three real call sites.
-- Every directory in `labs/` must be a crate (the workspace globs `labs/*`). A
-  library stub whose code has moved out goes in the workspace `exclude`.
+- Every directory in `labs/` must be a crate (the workspace globs `labs/*`), or be
+  listed in the workspace `exclude`. Excluded dirs are library stubs whose code has
+  moved out, and labs whose code lives in another repo or language (e.g.
+  `labs/hierophant`, a Python library). Those keep only `lab.toml`, `log/` and
+  `figures/`, made by hand, since `hp new sketch` only scaffolds Rust.
 - Keep dependencies few and deliberate; note why a heavy one was added.
 - `cargo fmt`, `cargo clippy`, `cargo test` should pass before committing.
 
@@ -148,7 +153,8 @@ Plan visually. Whenever you lay out a plan, compare approaches, or propose a des
 use the `lavish` skill to turn it into an HTML artifact that hyperprior can annotate
 and send back. Iterate on the feedback before you build anything. Plan artifacts
 live in `.lavish/` (gitignored, the lavish default). A plan that turns out to matter
-becomes a log entry.
+becomes a log entry. Poll output carries a large `dom_snapshot` and a `next_step`
+essay, so read it with those lines filtered out (`grep -v '^dom_snapshot\|^next_step'`).
 
 ## Self-learning
 
