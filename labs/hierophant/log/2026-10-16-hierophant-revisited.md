@@ -67,7 +67,7 @@ result has to reproduce without an API key.
 
 ## Later: the code, and first light
 
-The rewrite is about 700 lines. `Hierophant.ask(question, row=...)` computes exact
+The rewrite is about 1,000 lines of Python. `Hierophant.ask(question, row=...)` computes exact
 TreeSHAP for the row, rounds and sorts it, and sends it to the LLM with the question.
 The model has to reply in JSON: a list of sentences, each with one claim. Four kinds
 of claim for now:
